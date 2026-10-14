@@ -67,7 +67,7 @@ npx next start -p 3457 & node scripts/audit.mjs   # crawl links, assets, mobile 
 ## Before launch (founder input)
 
 - [ ] Business address (and optionally phone/WhatsApp, LinkedIn): `site.address`, `site.linkedin` in `src/lib/site.ts`. Also needed for US cold-email compliance.
-- [ ] Confirm core hours shown on `/about` (`coreHoursIST`, currently 11am–11pm IST) and the time-zone overlaps.
+- Hours are set in `hours` / `timezones` in `src/lib/site.ts` (Mon–Fri, 9am–6pm ET).
 - [ ] Confirm Care Plus terms (3 edit hours/month, next-business-day replies).
 - [ ] Have the Privacy and Terms pages reviewed.
 - [ ] Optional: analytics (e.g. Vercel Analytics).

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui";
 import { PageHero } from "@/components/sections";
 import { ContactForm } from "@/components/ContactForm";
-import { site } from "@/lib/site";
+import { hours, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -27,7 +27,7 @@ export default function ContactPage() {
               <div className="relative">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold-200">Email us directly</p>
                 <a href={`mailto:${site.email}`} className="font-display mt-3 block break-all text-2xl font-semibold underline decoration-white/30 underline-offset-4 hover:decoration-white sm:text-3xl">{site.email}</a>
-                <p className="mt-4 text-white/75">Team based in India · Calls scheduled in your time zone.</p>
+                <p className="mt-4 text-white/75">Available {hours.label}.</p>
               </div>
             </div>
             <div className="relative overflow-hidden rounded-[2rem] bg-sand p-8">

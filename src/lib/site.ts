@@ -180,7 +180,7 @@ export const reasons = [
   { title: "Transparent, published pricing", body: "Starting prices are on this site. Your quote is fixed in writing before work begins." },
   { title: "50% upfront, milestone billing", body: "Pay half to start and the rest on delivery — or in milestones for larger builds." },
   { title: "Secure online payments", body: "Invoices and card payments are handled through a secure online payment provider." },
-  { title: "Works across time zones", body: "Our team in India keeps overlapping hours with the US, UK, Europe and Australia, so you get quick replies and calls at sane times." },
+  { title: "Available on US business hours", body: "We're available Monday–Friday, 9am–6pm US Eastern, so you get quick replies and calls during your working day." },
   { title: "We ship our own products", body: "We build and run our own SaaS, so we know what it takes to launch and maintain software." },
 ];
 
@@ -327,7 +327,7 @@ export const faqs = [
   { q: "How much does a website cost?", a: "Business websites start at $1,500, larger lead-generation sites at $2,900, web app and SaaS MVPs at $7,500 and mobile app MVPs at $6,500. After a short call you get a fixed written quote, so the price doesn't change unless the scope does." },
   { q: "How do payments work?", a: "Typically 50% upfront to start and 50% on delivery. Larger projects are split into milestones. You pay by card or bank transfer through secure online invoices." },
   { q: "What if I don't like the design?", a: "You approve the design before we build. We design your key pages first and revise them with you — development only begins once you're happy." },
-  { q: "You're in India — how does communication work?", a: "We work with clients across the US, UK and beyond, and keep overlapping hours for calls. Most updates happen over email with a live preview link you can check anytime." },
+  { q: "When can I reach you?", a: "We're available Monday–Friday, 9am–6pm US Eastern (ET), which is 6am–3pm Pacific and 2pm–11pm in London. Calls are scheduled in those hours, and most updates happen over email with a live preview link you can check anytime." },
   { q: "How long does a project take?", a: "Most business websites take 2–3 weeks from approved design to launch. Web and mobile apps usually take 4–10 weeks depending on scope." },
   { q: "Do I own the website?", a: "Yes. Once the final invoice is paid, the code, design and content are yours, and we can hand over everything or keep maintaining it for you." },
   { q: "Can you work on my existing site?", a: "Yes. A speed sprint ($750) fixes slow loading and Core Web Vitals on your current site. If the site needs more, a full redesign starts at $1,500." },
@@ -348,11 +348,12 @@ export const capabilities = [
   { group: "Growth", items: ["Technical SEO", "Core Web Vitals", "Analytics & conversion tracking", "Ongoing care plans"] },
 ];
 
-// Overlap of each city's 9am–7pm day with our core hours (11am–11pm IST). Hours are local; daylight saving shifts these by about an hour.
-export const coreHoursIST = "11am–11pm IST";
+// Our availability, shown in US Eastern and converted to other zones (local times; US and UK daylight saving mostly line up).
+export const hours = { label: "Monday–Friday, 9am–6pm US Eastern (ET)", short: "Mon–Fri, 9am–6pm ET" };
 export const timezones = [
-  { city: "San Francisco", overlap: "9:00–10:30am", start: 9, end: 10.5 },
-  { city: "New York", overlap: "9:00am–1:30pm", start: 9, end: 13.5 },
-  { city: "London", overlap: "9:00am–6:30pm", start: 9, end: 18.5 },
-  { city: "Sydney", overlap: "4:30–7:00pm", start: 16.5, end: 19 },
+  { zone: "Eastern", abbr: "ET", example: "New York", local: "9am–6pm", start: 9, end: 18 },
+  { zone: "Central", abbr: "CT", example: "Chicago", local: "8am–5pm", start: 8, end: 17 },
+  { zone: "Mountain", abbr: "MT", example: "Denver", local: "7am–4pm", start: 7, end: 16 },
+  { zone: "Pacific", abbr: "PT", example: "Los Angeles", local: "6am–3pm", start: 6, end: 15 },
+  { zone: "London", abbr: "UK", example: "London", local: "2pm–11pm", start: 14, end: 23 },
 ];

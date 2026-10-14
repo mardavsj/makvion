@@ -214,20 +214,20 @@ function PunchMock() {
   const sites = [["acme-roofing.com", "99.98%", true], ["brightside.dental", "100%", true], ["emberandoak.co", "SSL · 12 days", false]] as const;
   return (
     <BrowserFrame url="websiteswithpunch.com/dashboard">
-      <div className="bg-white p-5 text-left">
+      <div className="bg-white p-3.5 text-left sm:p-5">
         <div className="flex items-center justify-between">
           <p className="font-display text-sm font-semibold text-ink">Monitors</p>
-          <span className="rounded-full bg-brand-50 px-2.5 py-0.5 text-[0.65rem] font-semibold text-brand-700">All systems normal</span>
+          <span className="whitespace-nowrap rounded-full bg-brand-50 px-2.5 py-0.5 text-[0.65rem] font-semibold text-brand-700">All systems normal</span>
         </div>
         <ul className="mt-4 space-y-2.5">
           {sites.map(([d, v, ok]) => (
-            <li key={d} className="flex items-center gap-3 rounded-xl border border-line px-3 py-2.5">
+            <li key={d} className="flex min-w-0 items-center gap-2.5 rounded-xl border border-line px-2.5 py-2.5 sm:gap-3 sm:px-3">
               <span className={`h-2 w-2 rounded-full ${ok ? "bg-brand-500" : "bg-gold-400"}`} />
               <span className="flex-1 truncate text-xs font-medium text-ink">{d}</span>
               <span className="hidden h-4 flex-1 items-end gap-[2px] sm:flex" aria-hidden>
                 {Array.from({ length: 20 }).map((_, i) => <span key={i} className={`flex-1 rounded-[1px] ${!ok && i > 16 ? "h-2 bg-gold-300" : "h-4 bg-brand-200"}`} />)}
               </span>
-              <span className={`text-[0.7rem] font-semibold ${ok ? "text-brand-700" : "text-gold-700"}`}>{v}</span>
+              <span className={`shrink-0 whitespace-nowrap text-[0.7rem] font-semibold ${ok ? "text-brand-700" : "text-gold-700"}`}>{v}</span>
             </li>
           ))}
         </ul>
@@ -260,11 +260,11 @@ export function ProductsShowcase({ detailed = false }: { detailed?: boolean }) {
       {products.map((p, i) => {
         const gold = p.accent === "gold";
         return (
-          <article key={p.name} className={`reveal relative grid items-center gap-10 overflow-hidden rounded-[2rem] p-7 sm:p-12 lg:grid-cols-2 ${gold ? "bg-white ring-1 ring-gold-200" : "bg-brand-900 text-white"}`}>
+          <article key={p.name} className={`reveal relative grid grid-cols-1 items-center gap-10 overflow-hidden rounded-[2rem] p-5 sm:p-12 lg:grid-cols-2 ${gold ? "bg-white ring-1 ring-gold-200" : "bg-brand-900 text-white"}`}>
             <div className={`${gold ? "bg-dots-gold" : "bg-grid-dark"} mask-radial pointer-events-none absolute inset-0`} />
             <div className={`relative ${i % 2 ? "lg:order-2" : ""}`}>
               <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ${gold ? "bg-gold-50 text-gold-700 ring-gold-200" : "bg-white/10 text-gold-200 ring-white/15"}`}>Built &amp; run by Makvion</span>
-              <h3 className="font-display mt-6 text-3xl font-semibold sm:text-5xl">{p.name}</h3>
+              <h3 className="font-display mt-6 text-[1.75rem] font-semibold leading-tight sm:text-5xl">{p.name}</h3>
               <p className={`mt-3 text-lg font-medium ${gold ? "text-gold-700" : "text-gold-200"}`}>{p.tagline}</p>
               <p className={`mt-5 max-w-md leading-relaxed ${gold ? "text-muted" : "text-white/75"}`}>{p.description}</p>
               {detailed && (

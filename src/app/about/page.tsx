@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Container, Eyebrow, SectionHeading } from "@/components/ui";
 import { CtaBand, IndustryMarquee, PageHero, Process } from "@/components/sections";
-import { capabilities, coreHoursIST, products, timezones, values } from "@/lib/site";
+import { capabilities, hours, products, timezones, values } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -78,42 +78,41 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* Global / time zones: gold-tinted */}
+      {/* Availability: gold-tinted */}
       <section className="relative overflow-hidden bg-sand py-24 sm:py-32">
         <div className="bg-dots-gold mask-fade-b pointer-events-none absolute inset-0" />
         <Container className="relative grid gap-14 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-5">
-            <SectionHeading eyebrowTone="gold" eyebrow="Global by default" title="Quick replies and calls in your business hours." intro="Our team is based in India (IST, UTC+5:30) and works with clients across North America, Europe and Asia-Pacific. We plan our day around yours." />
+            <SectionHeading eyebrowTone="gold" eyebrow="Availability" title="On US business hours, so you're never waiting." intro={`We're available ${hours.label}. Calls happen during your working day, and you get a clear reply to every message.`} />
             <ul className="reveal mt-8 space-y-3 text-ink/85">
-              {["Scheduled calls inside your business hours", "Replies within one business day, usually faster", "Async updates with a live preview link you can check anytime", "Written summaries after every call"].map((x) => (
+              {["Calls scheduled during US business hours", "Replies within one business day, usually faster", "Async updates with a live preview link you can check anytime", "Written summaries after every call"].map((x) => (
                 <li key={x} className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600" />{x}</li>
               ))}
             </ul>
           </div>
           <div className="lg:col-span-7">
             <div className="reveal rounded-[2rem] bg-white p-6 shadow-[0_40px_80px_-50px_rgba(19,32,30,.5)] ring-1 ring-gold-200 sm:p-8">
-              <div className="flex items-center justify-between">
-                <p className="font-display font-semibold">Working-hours overlap</p>
-                <Eyebrow tone="gold">Makvion · IST</Eyebrow>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <p className="font-display font-semibold">Our hours in your time zone</p>
+                <Eyebrow tone="gold">{hours.short}</Eyebrow>
               </div>
-              <div aria-hidden className="mt-6 grid grid-cols-[7.5rem_1fr] gap-4 text-[0.65rem] font-medium text-muted sm:grid-cols-[9rem_1fr_auto]">
+              <div aria-hidden className="mt-6 grid grid-cols-[6.5rem_1fr] gap-4 text-[0.65rem] font-medium text-muted sm:grid-cols-[8.5rem_1fr_6rem]">
                 <span>Local time</span>
-                <span className="flex justify-between"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></span>
-                <span className="hidden w-40 sm:block" />
+                <span className="flex justify-between"><span>12am</span><span>6am</span><span>12pm</span><span>6pm</span><span>12am</span></span>
+                <span className="hidden sm:block" />
               </div>
               <ul className="mt-2 divide-y divide-line">
                 {timezones.map((t) => (
-                  <li key={t.city} className="grid grid-cols-[7.5rem_1fr] items-center gap-4 py-4 sm:grid-cols-[9rem_1fr_auto]">
-                    <span className="font-semibold">{t.city}</span>
+                  <li key={t.abbr} className="grid grid-cols-[6.5rem_1fr] items-center gap-x-4 gap-y-1 py-4 sm:grid-cols-[8.5rem_1fr_6rem]">
+                    <span><span className="block font-semibold">{t.zone} <span className="text-muted">({t.abbr})</span></span><span className="block text-xs text-muted">{t.example}</span></span>
                     <span aria-hidden className="relative h-3 rounded-full bg-cream ring-1 ring-line">
-                      <span className="absolute inset-y-0 rounded-full bg-gold-100" style={{ left: `${(9 / 24) * 100}%`, width: `${(10 / 24) * 100}%` }} />
                       <span className="absolute inset-y-0 rounded-full bg-brand-500" style={{ left: `${(t.start / 24) * 100}%`, width: `${((t.end - t.start) / 24) * 100}%` }} />
                     </span>
-                    <span className="col-span-2 text-sm text-muted sm:col-span-1 sm:w-40">{t.overlap}</span>
+                    <span className="col-start-2 text-sm font-medium text-ink sm:col-start-3 sm:text-right">{t.local}</span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-xs text-muted">Gold: a 9am–7pm local working day. Green: overlap with our core hours ({coreHoursIST}). Daylight saving can shift this by an hour.</p>
+              <p className="mt-4 text-xs text-muted">Monday to Friday. Need a call outside these hours? Just ask and we&apos;ll try to make it work.</p>
             </div>
           </div>
         </Container>

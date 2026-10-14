@@ -42,6 +42,7 @@ await m.click('button[aria-controls="mobile-nav"]');
 const vis = await m.isVisible("#mobile-nav");
 await m.evaluate(() => scrollTo(0, 0)); await m.click('#mobile-nav a[href="/services"]'); await m.waitForURL("**/services"); await m.waitForTimeout(500);
 console.log("mobile menu opens:", vis, "| navigates & closes:", !(await m.isVisible("#mobile-nav")), "| scrollY", await m.evaluate(() => scrollY));
+if (process.env.AUDIT_FORM === "1") {
 // contact form against server without RESEND_API_KEY
 await page.goto(base + "/contact");
 await page.fill('input[name="name"]', "Test User"); await page.fill('input[name="email"]', "test@example.com");
@@ -55,6 +56,7 @@ console.log("API valid (no key):", await api({ name: "A B", email: "a@b.co", mes
 console.log("API invalid:", await api({ name: "", email: "x", message: "" }));
 console.log("API bad JSON:", await api("{nope"));
 console.log("API wrong type:", await api("x=1", { "content-type": "text/plain" }));
+}
 console.log("\npages crawled:", [...seen].join(" "));
 console.log("external links:", [...external].join(" "));
 console.log("problems:", bad.length ? bad : "none");

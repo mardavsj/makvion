@@ -80,3 +80,9 @@ body { background: #fff; color: var(--color-ink); -webkit-font-smoothing: antial
   background: linear-gradient(180deg, rgba(222,181,107,.30) 0%, rgba(44,116,105,.22) 45%, rgba(44,116,105,0) 85%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
+
+/* Grid items default to min-width:auto, which lets long content (mockups, URLs, big headings) push
+   single-column mobile grids wider than the screen. Let them shrink. */
+.grid > * { min-width: 0; }
+@layer base { .grid { grid-template-columns: minmax(0, 1fr); } } /* default single column that can shrink; grid-cols-* utilities override */
+h1, h2, h3 { overflow-wrap: break-word; }
