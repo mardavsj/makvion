@@ -1,51 +1,53 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
-import { nav, products, site } from "@/lib/site";
+import { Phone } from "lucide-react";
+import { WhatsAppIcon } from "./WhatsAppIcon";
+import { contactConfig, hours, nav, phoneLink, services, site, whatsappLink } from "@/lib/site";
 
 export function Footer() {
+  const cols = [
+    { title: "Services", links: services.slice(0, 6).map((s) => ({ href: `/services#${s.slug}`, label: s.title })) },
+    { title: "Company", links: [...nav.filter((n) => n.href !== "/contact"), { href: "/industries", label: "Industries" }, { href: "/products", label: "Our products" }] },
+    { title: "Get started", links: [{ href: "/contact", label: "Get a free quote" }, { href: "/contact#call", label: "Book a free call" }, { href: "/privacy", label: "Privacy policy" }, { href: "/terms", label: "Terms of service" }, { href: "/refund-policy", label: "Refund policy" }] },
+  ];
   return (
-    <footer className="noise relative overflow-hidden bg-brand-950 text-white/80">
-      <div className="bg-grid-dark mask-fade-b pointer-events-none absolute inset-0 opacity-60" />
-      <div className="relative mx-auto max-w-7xl px-5 pt-16 sm:px-8 md:pt-24">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <div className="text-white"><Logo variant="gold" /></div>
-            <p className="mt-6 max-w-sm leading-relaxed text-white/70">
-              A design and engineering studio building websites, web apps, SaaS and mobile apps for businesses worldwide.
-            </p>
-            <a href={`mailto:${site.email}`} className="mt-6 inline-block text-[0.95rem] font-medium text-gold-200 underline decoration-gold-400/40 underline-offset-4 transition hover:decoration-gold-200">
-              {site.email}
-            </a>
+    <footer className="relative overflow-hidden border-t border-line bg-gradient-to-b from-cream to-brand-50/60">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold-300 to-transparent" />
+      <div className="relative mx-auto w-full max-w-[1200px] px-5 py-16 sm:px-8">
+        <div className="grid gap-12">
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div>
+              <Logo />
+              <p className="mt-5 text-[0.95rem] leading-relaxed text-muted">Websites, online stores and apps with premium-agency quality, quoted well below agency rates. Based in Pune, working with clients worldwide.</p>
+            </div>
+            <div className="lg:self-end lg:text-right">
+              <a href={`mailto:${site.email}`} className="inline-block font-semibold text-brand-700 hover:underline">{site.email}</a>
+              <p className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm lg:justify-end">
+                {phoneLink && <a href={phoneLink} className="inline-flex items-center gap-1.5 font-semibold text-ink"><Phone className="h-4 w-4 text-brand-500" />{contactConfig.phoneDisplay}</a>}
+                {whatsappLink && <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 font-semibold text-ink"><WhatsAppIcon className="h-4 w-4 text-brand-500" />WhatsApp us</a>}
+              </p>
+              <p className="mt-2 text-sm text-muted">{hours.label}</p>
+            </div>
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:col-span-7">
-            {[
-              { h: "Company", links: [...nav, { href: "/about", label: "About" }, { href: "/contact", label: "Contact" }].map((n) => ({ ...n, ext: false })) },
-              { h: "Our products", links: products.map((p) => ({ href: p.url, label: p.name, ext: true })) },
-              { h: "Legal", links: [{ href: "/privacy", label: "Privacy policy", ext: false }, { href: "/terms", label: "Terms of service", ext: false }] },
-            ].map((col) => (
-              <div key={col.h}>
-                <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-gold-300">{col.h}</h2>
-                <ul className="mt-5 space-y-3 text-sm">
-                  {col.links.map((l) => (
-                    <li key={l.href}>
-                      {l.ext ? <a className="transition hover:text-white" href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>
-                        : <Link className="transition hover:text-white" href={l.href}>{l.label}</Link>}
-                    </li>
-                  ))}
+          <div className="grid gap-10 border-t border-line pt-10 sm:grid-cols-3">
+            {cols.map((c) => (
+              <div key={c.title}>
+                <p className="text-sm font-semibold text-ink">{c.title}</p>
+                <ul className="mt-4 space-y-3">
+                  {c.links.map((l) => <li key={l.href + l.label}><Link href={l.href} className="text-[0.94rem] text-muted transition-colors hover:text-brand-700">{l.label}</Link></li>)}
                 </ul>
               </div>
             ))}
           </div>
         </div>
-        <div aria-hidden className="pointer-events-none mt-14 h-[13vw] select-none overflow-hidden lg:h-[11rem]">
-          <p className="font-display footer-wordmark text-center text-[20vw] font-semibold leading-[0.9] tracking-[-0.06em] lg:text-[17rem]">makvion</p>
+        <div className="mt-14 grid gap-6 border-t border-line pt-8 text-sm text-muted lg:grid-cols-2">
+          <div>
+            <p className="font-semibold text-ink">Registered office</p>
+            <address className="mt-1 not-italic leading-relaxed">{site.address}</address>
+          </div>
+          <p className="lg:self-end lg:text-right">© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
         </div>
-      </div>
-      <div className="relative border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-          <p>© {new Date().getFullYear()} Makvion Technologies. All rights reserved.</p>
-          <p>India · Working with clients worldwide</p>
-        </div>
+        <p aria-hidden className="font-display pointer-events-none mt-10 select-none bg-gradient-to-b from-brand-600/15 to-transparent bg-clip-text text-center text-[22vw] font-extrabold leading-[0.8] tracking-tighter text-transparent lg:text-[15rem]">makvion</p>
       </div>
     </footer>
   );

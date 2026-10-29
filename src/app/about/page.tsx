@@ -1,126 +1,62 @@
 import type { Metadata } from "next";
+import { pageMeta, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import Image from "next/image";
-import { Container, Eyebrow, SectionHeading } from "@/components/ui";
-import { CtaBand, IndustryMarquee, PageHero, Process } from "@/components/sections";
-import { capabilities, hours, products, timezones, values } from "@/lib/site";
+import { Container } from "@/components/ui";
+import { FinalCta, Kicker, WhyUs } from "@/components/home/Sections";
+import { AboutValues } from "@/components/AboutValues";
+import { Capabilities } from "@/components/v6";
+import { hours, site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "About",
-  description: "Makvion Technologies is a design and engineering studio building websites, web apps, SaaS and mobile apps for businesses worldwide.",
-  alternates: { canonical: "/about" },
-};
+export const metadata: Metadata = pageMeta({
+  path: "/about",
+  title: "About Makvion: Web & App Studio in Pune, India",
+  description: "Makvion Technologies is a design and engineering studio in Pune, Maharashtra, building websites, web apps, SaaS and Android apps for India and the world.",
+  keywords: ["web design studio Pune", "software development company Pune", "IT company Pimpri Chinchwad", "web agency India"],
+});
 
 export default function AboutPage() {
   return (
     <>
-      <PageHero eyebrow="About Makvion" title={<>Your business, online at its best. <span className="text-brand-600">Without the hassle.</span></>}
-        intro="Makvion Technologies is a design and engineering studio that helps businesses worldwide win more customers online, with websites, web apps and mobile apps built to perform." />
-
-      {/* Mission: overlapping images + text */}
-      <section className="py-24 sm:py-32">
-        <Container className="grid items-center gap-16 lg:grid-cols-12">
-          <div className="relative lg:col-span-6">
-            <div className="relative aspect-[4/5] w-[78%] overflow-hidden rounded-[2rem]">
-              <Image src="/images/team.jpg" alt="A team working together around laptops" fill sizes="(min-width:1024px) 38vw, 78vw" className="object-cover" />
-            </div>
-            <div className="absolute bottom-[-2rem] right-0 aspect-square w-[52%] overflow-hidden rounded-[2rem] ring-8 ring-white">
-              <Image src="/images/workspace.jpg" alt="A minimal desk with a laptop" fill sizes="(min-width:1024px) 26vw, 52vw" className="object-cover" />
-            </div>
-            <div aria-hidden className="bg-dots-gold absolute -left-6 -top-6 -z-10 h-40 w-40 rounded-3xl" />
-          </div>
-          <div className="lg:col-span-6">
-            <SectionHeading eyebrow="Our mission" title="Give every business software it can be proud of." />
-            <div className="reveal mt-8 space-y-5 text-lg leading-relaxed text-muted">
-              <p>Great websites and apps used to be something only large companies could afford. We exist to change that, bringing product-grade design and engineering to small and growing businesses without agency overheads, vague estimates or surprise invoices.</p>
-              <p>Every engagement is built on the same foundation: understand how your customers decide, design an experience around that, and engineer it to be fast, accessible and easy to grow.</p>
-            </div>
-          </div>
+      <JsonLd data={breadcrumbJsonLd([{ name: "About", path: "/about" }])} />
+      <section className="relative overflow-hidden bg-cream text-ink">
+        <div aria-hidden className="bg-grid pointer-events-none absolute inset-0 opacity-60" />
+        <Container className="relative pb-20 pt-16 sm:pb-28 sm:pt-24">
+          <Kicker>About Makvion</Kicker>
+          <h1 className="font-display mt-8 max-w-5xl text-[2.7rem] font-extrabold leading-[0.98] tracking-[-0.045em] sm:text-[4.8rem] lg:text-[5.8rem]">
+            Big-agency quality, <span className="text-brand-600">made affordable.</span>
+          </h1>
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">Makvion Technologies is a design and engineering studio in Pune. We help businesses in India and around the world win more customers online, with websites and apps built to perform.</p>
         </Container>
       </section>
-
-      {/* Values: deep green bento */}
-      <section className="noise relative overflow-hidden bg-brand-900 py-24 text-white sm:py-32">
-        <div className="bg-grid-dark mask-radial pointer-events-none absolute inset-0" />
-        <Container className="relative">
-          <SectionHeading tone="dark" eyebrow="What we value" title={<>Principles we <span className="text-gold-300">don&apos;t compromise on.</span></>} />
-          <div className="mt-14 grid gap-4 md:grid-cols-2">
-            {values.map((v, i) => (
-              <div key={v.title} className={`reveal relative overflow-hidden rounded-[1.75rem] p-8 sm:p-10 ${i === 0 || i === 3 ? "bg-white/[0.06] ring-1 ring-white/10" : "bg-gold-300 text-ink"}`} style={{ transitionDelay: `${(i % 2) * 80}ms` }}>
-                <span className={`font-display text-6xl font-semibold ${i === 0 || i === 3 ? "text-white/15" : "text-ink/15"}`}>{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="font-display mt-4 text-2xl font-semibold">{v.title}</h3>
-                <p className={`mt-3 max-w-md text-lg leading-relaxed ${i === 0 || i === 3 ? "text-white/75" : "text-ink/80"}`}>{v.body}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Capabilities */}
-      <section className="py-24 sm:py-32">
-        <Container>
-          <SectionHeading eyebrow="Capabilities" title="One team for everything. Nothing lost in hand-offs." intro="Design, engineering and product thinking under one roof, so you have one point of contact from first sketch to launch and beyond." />
-          <div className="mt-14 grid gap-px overflow-hidden rounded-[1.75rem] bg-line ring-1 ring-line sm:grid-cols-2 lg:grid-cols-4">
-            {capabilities.map((c, i) => (
-              <div key={c.group} className="reveal bg-white p-8 transition-colors hover:bg-cream" style={{ transitionDelay: `${i * 70}ms` }}>
-                <p className="font-display text-sm font-semibold text-gold-700">{String(i + 1).padStart(2, "0")}</p>
-                <h3 className="font-display mt-3 text-2xl font-semibold">{c.group}</h3>
-                <ul className="mt-6 space-y-3 text-muted">
-                  {c.items.map((x) => <li key={x} className="flex items-center gap-2.5"><span className="h-1 w-3 rounded-full bg-brand-500" />{x}</li>)}
-                </ul>
-              </div>
-            ))}
-          </div>
-          <p className="reveal mt-8 text-muted">
-            We also build and operate our own products: {products.map((p, i) => (
-              <span key={p.name}>{i > 0 && " and "}<a className="font-medium text-brand-700 underline underline-offset-4" href={p.url} target="_blank" rel="noopener noreferrer">{p.name}</a></span>
-            ))}.
-          </p>
-        </Container>
-      </section>
-
-      {/* Availability: gold-tinted */}
-      <section className="relative overflow-hidden bg-sand py-24 sm:py-32">
-        <div className="bg-dots-gold mask-fade-b pointer-events-none absolute inset-0" />
-        <Container className="relative grid gap-14 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-5">
-            <SectionHeading eyebrowTone="gold" eyebrow="Availability" title="On US business hours, so you're never waiting." intro={`We're available ${hours.label}. Calls happen during your working day, and you get a clear reply to every message.`} />
-            <ul className="reveal mt-8 space-y-3 text-ink/85">
-              {["Calls scheduled during US business hours", "Replies within one business day, usually faster", "Async updates with a live preview link you can check anytime", "Written summaries after every call"].map((x) => (
-                <li key={x} className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600" />{x}</li>
-              ))}
-            </ul>
-          </div>
+      <section className="relative overflow-hidden bg-brand-950 text-white">
+        <Container className="relative grid gap-12 py-24 sm:py-32 lg:grid-cols-12 lg:items-center lg:gap-16">
           <div className="lg:col-span-7">
-            <div className="reveal rounded-[2rem] bg-white p-6 shadow-[0_40px_80px_-50px_rgba(19,32,30,.5)] ring-1 ring-gold-200 sm:p-8">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <p className="font-display font-semibold">Our hours in your time zone</p>
-                <Eyebrow tone="gold">{hours.short}</Eyebrow>
-              </div>
-              <div aria-hidden className="mt-6 grid grid-cols-[6.5rem_1fr] gap-4 text-[0.65rem] font-medium text-muted sm:grid-cols-[8.5rem_1fr_6rem]">
-                <span>Local time</span>
-                <span className="flex justify-between"><span>12am</span><span>6am</span><span>12pm</span><span>6pm</span><span>12am</span></span>
-                <span className="hidden sm:block" />
-              </div>
-              <ul className="mt-2 divide-y divide-line">
-                {timezones.map((t) => (
-                  <li key={t.abbr} className="grid grid-cols-[6.5rem_1fr] items-center gap-x-4 gap-y-1 py-4 sm:grid-cols-[8.5rem_1fr_6rem]">
-                    <span><span className="block font-semibold">{t.zone} <span className="text-muted">({t.abbr})</span></span><span className="block text-xs text-muted">{t.example}</span></span>
-                    <span aria-hidden className="relative h-3 rounded-full bg-cream ring-1 ring-line">
-                      <span className="absolute inset-y-0 rounded-full bg-brand-500" style={{ left: `${(t.start / 24) * 100}%`, width: `${((t.end - t.start) / 24) * 100}%` }} />
-                    </span>
-                    <span className="col-start-2 text-sm font-medium text-ink sm:col-start-3 sm:text-right">{t.local}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-4 text-xs text-muted">Monday to Friday. Need a call outside these hours? Just ask and we&apos;ll try to make it work.</p>
+            <Kicker dark>Why we exist</Kicker>
+            <p className="font-display mt-8 text-[2.6rem] font-extrabold leading-[0.98] tracking-[-0.045em] sm:text-[4.4rem]">Great websites shouldn&apos;t be <span className="text-gold-300">only for big budgets.</span></p>
+            <div className="mt-10 grid gap-6 text-lg leading-relaxed text-white/75">
+              <p>Most businesses are stuck choosing between an expensive agency and a cheap template that doesn&apos;t win customers. We built Makvion to close that gap: careful design and clean engineering, quoted honestly and well below agency rates.</p>
+              <p>We also build and run our own software products, so we know what it takes to keep something live, fast and reliable.</p>
+            </div>
+          </div>
+          <div className="relative lg:col-span-5">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] sm:aspect-[4/3] lg:aspect-[4/5]">
+              <Image src="/images/team.jpg" alt="A small team working together around a table" fill sizes="(min-width:1024px) 460px, 100vw" className="object-cover" />
             </div>
           </div>
         </Container>
       </section>
-
-      <IndustryMarquee />
-      <Process />
-      <CtaBand />
+      <AboutValues />
+      <Capabilities />
+      <WhyUs statement={false} />
+      <section className="bg-cream">
+        <Container className="grid gap-10 py-20 sm:grid-cols-3 sm:py-24">
+          <div><p className="text-xs font-bold uppercase tracking-[0.2em] text-gold-600">Registered office</p><address className="mt-3 not-italic text-lg leading-relaxed">{site.address}</address></div>
+          <div><p className="text-xs font-bold uppercase tracking-[0.2em] text-gold-600">Hours</p><p className="mt-3 text-lg">{hours.label}</p><p className="mt-1 text-muted">{hours.global}</p></div>
+          <div><p className="text-xs font-bold uppercase tracking-[0.2em] text-gold-600">Email</p><a href={`mailto:${site.email}`} className="font-display mt-3 block text-2xl font-extrabold text-brand-700 hover:underline">{site.email}</a></div>
+        </Container>
+      </section>
+      <FinalCta />
     </>
   );
 }

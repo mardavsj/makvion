@@ -5,7 +5,7 @@ import { services, site } from "@/lib/site";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
-const field = "mt-2 block w-full rounded-xl border border-line bg-white px-4 py-3.5 text-ink placeholder:text-muted/60 transition focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-100";
+const field = "mt-2 block w-full rounded-lg border border-line bg-white px-4 py-3 text-ink placeholder:text-muted/60 transition focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-100";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -40,7 +40,7 @@ export function ContactForm() {
 
   if (status === "sent")
     return (
-      <div role="status" className="rounded-3xl border border-brand-200 bg-brand-50 p-10">
+      <div role="status" className="rounded-2xl border border-brand-200 bg-brand-50 p-10">
         <p className="font-display text-3xl font-semibold text-brand-700">Thanks — message received.</p>
         <p className="mt-3 text-muted">We&apos;ll get back to you within one business day. Need us sooner? Email <a className="font-medium text-brand-700 underline" href={`mailto:${site.email}`}>{site.email}</a>.</p>
       </div>
@@ -48,8 +48,8 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="relative grid gap-6 sm:grid-cols-2" aria-busy={status === "sending"}>
-      <label className="text-sm font-medium">Your name<input required name="name" {...aria("name")} autoComplete="name" className={field} placeholder="Jane Smith" />{fe("name")}</label>
-      <label className="text-sm font-medium">Email<input required type="email" name="email" {...aria("email")} autoComplete="email" className={field} placeholder="jane@company.com" />{fe("email")}</label>
+      <label className="text-sm font-medium">Your name<input required name="name" {...aria("name")} autoComplete="name" className={field} placeholder="Your full name" />{fe("name")}</label>
+      <label className="text-sm font-medium">Email<input required type="email" name="email" {...aria("email")} autoComplete="email" className={field} placeholder="you@company.com" />{fe("email")}</label>
       <label className="text-sm font-medium">Company<input name="company" {...aria("company")} autoComplete="organization" className={field} placeholder="Company name" />{fe("company")}</label>
       <label className="text-sm font-medium">Current website<input name="website" {...aria("website")} type="url" className={field} placeholder="https://" />{fe("website")}</label>
       <label className="text-sm font-medium">What do you need?
@@ -59,10 +59,10 @@ export function ContactForm() {
           <option>Something else</option>
         </select>
       </label>
-      <label className="text-sm font-medium">Budget (USD)
+      <label className="text-sm font-medium">Budget (INR, optional)
         <select name="budget" className={field} defaultValue="">
           <option value="" disabled>Select a range</option>
-          <option>Under $1,500</option><option>$1,500 – $3,000</option><option>$3,000 – $7,500</option><option>$7,500+</option><option>Not sure yet</option>
+          <option>Under ₹25k</option><option>₹25k – ₹50k</option><option>₹50k – ₹1L</option><option>₹1L+</option><option>Not sure</option>
         </select>
       </label>
       <label className="text-sm font-medium sm:col-span-2">Tell us about your project
@@ -73,9 +73,9 @@ export function ContactForm() {
       <div className="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs text-muted">By sending, you agree to our <Link href="/privacy" className="underline">privacy policy</Link>.</p>
         <button type="submit" disabled={status === "sending"}
-          className="inline-flex items-center justify-center rounded-full bg-brand-600 px-7 py-3.5 font-semibold text-white transition hover:bg-brand-700 disabled:opacity-60">
+          className="inline-flex items-center justify-center rounded-xl bg-brand-500 px-6 py-3.5 font-semibold text-white transition hover:bg-brand-700 disabled:opacity-60">
           {status === "sending" && <span aria-hidden className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />}
-          {status === "sending" ? "Sending…" : "Send message"}
+          {status === "sending" ? "Sending…" : "Get my free quote"}
         </button>
       </div>
       {status === "error" && (

@@ -1,53 +1,53 @@
 import type { Metadata } from "next";
-import { Container, SectionHeading } from "@/components/ui";
-import { CtaBand, FaqSection, PageHero, CarePlans, PaymentNote, Pricing, Process, ServicesBento, ServicesDetailed } from "@/components/sections";
-import { faqs, services } from "@/lib/site";
+import { pageMeta, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { services, site } from "@/lib/site";
+import { Arrow, Button, Container } from "@/components/ui";
+import { FinalCta, Kicker, ProcessCards } from "@/components/home/Sections";
+import { ServicesDetail } from "@/components/ServicesDetail";
 
-export const metadata: Metadata = {
-  title: "Services & Pricing",
-  description: "Websites from $1,500, web app & SaaS MVPs from $7,500, mobile app MVPs from $6,500, speed sprints from $750, redesigns from $1,500 and care plans from $99/mo. 50% upfront, milestone billing.",
-  alternates: { canonical: "/services" },
+export const metadata: Metadata = pageMeta({
+  path: "/services",
+  title: "Web, E-commerce & App Development Services | Makvion",
+  description: "Business websites, e-commerce stores with UPI checkout, web apps, Android apps, landing pages, SEO and maintenance for Indian businesses. Free quote today.",
+  keywords: ["website development services India", "ecommerce website development", "Android app development company", "web app development India", "landing page design", "local SEO services Pune", "website maintenance services"],
+});
+
+const servicesJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": services.map((sv) => ({
+    "@type": "Service",
+    name: sv.title,
+    description: sv.short,
+    serviceType: sv.title,
+    url: `${site.url}/services#${sv.slug}`,
+    provider: { "@id": `${site.url}/#business` },
+    areaServed: [{ "@type": "Country", name: "India" }, { "@type": "Place", name: "Worldwide" }],
+  })),
 };
 
 export default function ServicesPage() {
   return (
     <>
-      <PageHero eyebrow="Services & pricing" title={<>Grow your business online. <span className="text-brand-600">Know the price upfront.</span></>}
-        intro="More enquiries, smoother operations, fewer headaches. Every project starts with a fixed written quote, and you approve the design before we build."
-        aside={
-          <ul className="reveal grid grid-cols-2 gap-3">
-            {services.slice(0, 4).map((s) => (
-              <li key={s.slug}><a href={`#${s.slug}`} className="block rounded-2xl bg-white/80 p-4 ring-1 ring-line backdrop-blur transition hover:ring-brand-300">
-                <span className="block text-sm font-semibold text-ink">{s.title}</span>
-                <span className="mt-1 block text-sm text-brand-700">From {s.from}</span>
-              </a></li>
-            ))}
-          </ul>
-        } />
-      <section className="py-24 sm:py-32">
-        <Container>
-          <h2 className="sr-only">Services overview</h2>
-          <ServicesBento />
+      <JsonLd data={breadcrumbJsonLd([{ name: "Services", path: "/services" }])} />
+      <JsonLd data={servicesJsonLd} />
+      <section className="relative overflow-hidden bg-cream text-ink">
+        <div aria-hidden className="bg-grid pointer-events-none absolute inset-0 opacity-60" />
+        <Container className="relative pb-20 pt-16 sm:pb-28 sm:pt-24">
+          <Kicker>Services</Kicker>
+          <h1 className="font-display mt-8 max-w-5xl text-[2.7rem] font-extrabold leading-[0.98] tracking-[-0.045em] sm:text-[4.8rem] lg:text-[5.8rem]">
+            Websites, stores and apps that <span className="text-brand-600">bring in customers.</span>
+          </h1>
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">Every project is custom designed, mobile-first and quoted after a free call, so you only pay for what you need.</p>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <Button href="/contact" size="lg">Get a free quote <Arrow /></Button>
+            <Button href="/services#websites" variant="secondary" size="lg">See what&apos;s included</Button>
+          </div>
         </Container>
       </section>
-      <section className="bg-white pb-24 sm:pb-32">
-        <Container>
-          <SectionHeading eyebrow="In detail" title="What you get, in detail" />
-          <div className="mt-12"><ServicesDetailed /></div>
-        </Container>
-      </section>
-      <section className="relative overflow-hidden bg-sand py-24 sm:py-32">
-        <div className="bg-dots-gold mask-fade-b pointer-events-none absolute inset-0" />
-        <Container className="relative">
-          <SectionHeading center eyebrowTone="gold" eyebrow="Packages" title="Pick the package that fits your goals" intro="Starting prices for the most common projects. Custom scopes are always welcome." />
-          <div className="mt-16"><Pricing /></div>
-          <CarePlans />
-          <PaymentNote />
-        </Container>
-      </section>
-      <Process />
-      <FaqSection items={faqs.slice(0, 5)} />
-      <CtaBand title="Get a free mockup and a fixed quote." />
+      <ServicesDetail />
+      <ProcessCards />
+      <FinalCta title="Not sure which service you need?" body="Tell us your goal. We'll recommend the simplest option that gets you there, with a clear written quote." />
     </>
   );
 }

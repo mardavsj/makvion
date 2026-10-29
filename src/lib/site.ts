@@ -6,18 +6,33 @@ export const site = {
   url: "https://makvion.com",
   email: "contact@makvion.com",
   location: "Pune, India",
+  registered: "Registered in Pune, Maharashtra, India",
+  address: "Flat No 809, Luxury Square, GAT No 606 P, Jadhavwadi, Chikhali, Haveli, Pune 411062, Maharashtra, India",
+  addressParts: { street: "Flat No 809, Luxury Square, GAT No 606 P, Jadhavwadi, Chikhali, Haveli", locality: "Pune", region: "Maharashtra", postalCode: "411062", country: "IN" },
   description:
-    "Win more customers with a fast, trustworthy website or app from Makvion. You approve the design before we build, with fixed quotes and milestone billing.",
-  // TODO: add registered business address, phone/WhatsApp and LinkedIn when ready.
-  address: null as string | null,
+    "Makvion Technologies builds fast, professional websites, e-commerce stores, web apps and Android apps for growing businesses in India and worldwide. Premium quality, budget-friendly quotes. Get a free consultation.",
+  // TODO: add LinkedIn when ready.
   linkedin: null as string | null,
 };
 
+// WhatsApp / phone CTA. Numbers in international format without "+" or spaces.
+export const contactConfig = {
+  whatsappNumber: "917499283045" as string | null,
+  phoneNumber: "917499283045" as string | null,
+  phoneDisplay: "+91 74992 83045",
+  whatsappMessage: "Hi Makvion, I'd like a free quote",
+};
+export const whatsappLink = contactConfig.whatsappNumber
+  ? `https://wa.me/${contactConfig.whatsappNumber}?text=${encodeURIComponent(contactConfig.whatsappMessage)}`
+  : null;
+export const phoneLink = contactConfig.phoneNumber ? `tel:+${contactConfig.phoneNumber}` : null;
+
 export const nav = [
   { href: "/services", label: "Services" },
-  { href: "/industries", label: "Industries" },
   { href: "/work", label: "Work" },
-  { href: "/products", label: "Products" },
+  { href: "/process", label: "Process" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export type Service = {
@@ -25,164 +40,106 @@ export type Service = {
   title: string;
   short: string;
   description: string;
-  from: string;
   timeline: string;
   includes: string[];
-  icon: "globe" | "layers" | "phone" | "gauge" | "shield" | "spark";
+  icon: "globe" | "layers" | "phone" | "gauge" | "shield" | "spark" | "cart" | "search" | "target";
 };
 
 export const services: Service[] = [
   {
     slug: "websites",
     title: "Business websites",
-    short: "Turn more visitors into calls, bookings and quote requests.",
+    short: "Look established online and turn visitors into calls, WhatsApp chats and enquiries.",
     description:
-      "Get found on Google, earn trust in seconds and make it effortless for customers to contact you. A custom design built in Next.js, fast on every phone, with a clear next step on every page.",
-    from: "$1,500",
-    timeline: "2–3 weeks",
-    includes: [
-      "Custom design for up to 6 pages",
-      "Mobile-first, 90+ Lighthouse target",
-      "On-page SEO, analytics & sitemap",
-      "Contact / quote forms",
-      "Easy content updates",
-    ],
+      "A custom website that makes your business look as professional as it is. Fast on every phone, easy to find on Google, with a clear way to call, WhatsApp or enquire from every page.",
+    timeline: "Typically 2–3 weeks",
+    includes: ["Custom design, no templates", "Mobile-first and fast on 4G", "On-page SEO, sitemap & analytics", "Enquiry, call & WhatsApp buttons", "Easy content updates"],
     icon: "globe",
+  },
+  {
+    slug: "ecommerce",
+    title: "E-commerce stores",
+    short: "Sell online with a smooth checkout: UPI, cards and wallets via Razorpay.",
+    description:
+      "An online store your customers trust with their money. Fast product pages, Razorpay checkout with UPI, cards, net banking and wallets, order emails and a simple admin to manage stock.",
+    timeline: "Typically 3–6 weeks",
+    includes: ["Razorpay / UPI checkout", "Product catalogue & variants", "Order & inventory admin", "Shipping & COD options", "Order confirmation emails"],
+    icon: "cart",
   },
   {
     slug: "web-apps",
     title: "Web apps & SaaS",
-    short: "Launch your product or automate your operations, built to scale from day one.",
+    short: "Launch your product or replace spreadsheets with software built to scale.",
     description:
-      "Get your idea in front of paying users, or replace spreadsheets with a tool your team enjoys. Auth, payments, databases and admin panels on the same stack we use to run our own SaaS.",
-    from: "$7,500",
-    timeline: "5–10 weeks",
-    includes: [
-      "Product scoping & UX flows",
-      "Auth, roles & billing",
-      "Postgres, Prisma & cloud hosting",
-      "Admin dashboards",
-      "Launch support",
-    ],
+      "Get your idea in front of paying users, or give your team a tool that saves hours every week. Logins, payments, dashboards and admin panels on the same modern stack we use for our own products.",
+    timeline: "Typically 5–10 weeks",
+    includes: ["Scoping & UX flows", "Logins, roles & subscriptions", "Postgres, Prisma & cloud hosting", "Admin dashboards & reports", "Launch support"],
     icon: "layers",
   },
   {
     slug: "mobile-apps",
-    title: "Mobile apps",
+    title: "Android apps",
     short: "Put your business on your customers' home screen.",
     description:
-      "Make repeat orders, bookings and loyalty effortless with an app that feels native. Android and cross-platform builds, published to the store for you.",
-    from: "$6,500",
-    timeline: "4–8 weeks",
-    includes: [
-      "Android & cross-platform builds",
-      "API & backend integration",
-      "Push notifications",
-      "Play Store publishing",
-      "Analytics & crash reporting",
-    ],
+      "Android and cross-platform apps for bookings, orders, field teams or internal operations. Built, tested and published to the Google Play Store for you.",
+    timeline: "Typically 4–8 weeks",
+    includes: ["Android & cross-platform builds", "API & backend integration", "Push notifications", "Play Store publishing", "Crash reporting & analytics"],
     icon: "phone",
   },
   {
-    slug: "speed",
-    title: "Speed sprint",
-    short: "Stop losing customers to a slow website.",
+    slug: "landing-pages",
+    title: "Landing pages",
+    short: "One focused page that turns ad clicks into leads.",
     description:
-      "Win back the visitors who leave before your page loads. We audit your current site and fix what slows it down (images, scripts, fonts, hosting and Core Web Vitals) without a rebuild.",
-    from: "$750",
-    timeline: "1 week",
-    includes: [
-      "Performance & Core Web Vitals audit",
-      "Image, script & font optimisation",
-      "Mobile layout quick fixes",
-      "Before/after speed report",
-      "Recommendations for next steps",
-    ],
-    icon: "gauge",
+      "Running Google or Meta ads, launching a course or a new product? A fast, focused landing page with a single goal, so more of your ad spend turns into enquiries.",
+    timeline: "Typically 1 week",
+    includes: ["Conversion-focused copy layout", "Lead form with email alerts", "WhatsApp & call buttons", "Ad & analytics tracking setup", "A/B-ready sections"],
+    icon: "target",
   },
   {
-    slug: "redesign",
-    title: "Website redesign",
-    short: "Turn a dated website into one customers trust.",
+    slug: "seo",
+    title: "SEO & Google Business",
+    short: "Show up when people nearby search for what you sell.",
     description:
-      "Keep your content and search rankings while your site gets a modern design, a faster build and clear calls to action that turn visitors into enquiries.",
-    from: "$1,500",
-    timeline: "2–3 weeks",
-    includes: [
-      "UX & conversion review",
-      "Fresh design you approve first",
-      "Rebuilt fast in Next.js",
-      "Redirects to protect SEO",
-      "Content migration",
-    ],
-    icon: "spark",
+      "Technical SEO, page speed and a fully set up Google Business Profile, so customers in your city find you on Search and Maps, see your hours and call you directly.",
+    timeline: "Setup in 1–2 weeks",
+    includes: ["Google Business Profile setup", "Local SEO & Maps listing", "Search Console & analytics", "Speed & Core Web Vitals fixes", "Keyword-focused page structure"],
+    icon: "search",
   },
   {
     slug: "maintenance",
-    title: "Care & maintenance",
-    short: "Never think about your website's upkeep again.",
+    title: "Support & maintenance",
+    short: "Never worry about your website's upkeep again.",
     description:
-      "Your site stays online, secure and up to date while you run your business. Uptime, SSL and domain monitoring through our own product, Websites With Punch, plus edits, backups and fixes every month.",
-    from: "$99/mo",
-    timeline: "Monthly plan",
-    includes: [
-      "Care $99/mo or Care Plus $199/mo",
-      "Uptime, SSL & domain monitoring",
-      "Security & dependency updates",
-      "Daily backups",
-      "Up to 3 hours of edits a month on Care Plus",
-    ],
+      "Your site stays online, secure and up to date while you run your business. Uptime, SSL and domain monitoring through our own product, Websites With Punch, plus edits, backups and fixes.",
+    timeline: "Monthly support",
+    includes: ["Uptime, SSL & domain monitoring", "Security & dependency updates", "Regular backups", "Content & design edits", "Priority fixes"],
     icon: "shield",
   },
 ];
 
-export const packages = [
-  {
-    name: "Launch",
-    price: "$1,500",
-    note: "Starting price",
-    blurb: "A professional website for a local or small business.",
-    features: ["Up to 6 custom pages", "Mobile-first & fast", "SEO basics + analytics", "Contact & quote forms", "2 revision rounds"],
-    featured: false,
-  },
-  {
-    name: "Growth",
-    price: "$2,900",
-    note: "Starting price",
-    blurb: "A larger site built to win leads and rank in search.",
-    features: ["Up to 12 pages", "Booking or CMS integration", "Landing pages for campaigns", "Copywriting help", "30 days of post-launch support"],
-    featured: true,
-  },
-  {
-    name: "Product",
-    price: "$7,500",
-    note: "Starting price",
-    blurb: "Web apps, SaaS MVPs and custom platforms.",
-    features: ["Scoping workshop", "Auth, payments & database", "Admin dashboard", "Milestone billing", "Launch & handover"],
-    featured: false,
-  },
-];
-
-export const carePlans = [
-  { name: "Care", price: "$99", period: "/mo", blurb: "Keep your site online, secure and up to date.", features: ["Uptime, SSL & domain monitoring", "Security & dependency updates", "Daily backups", "Small fixes, replies within 2 business days"] },
-  { name: "Care Plus", price: "$199", period: "/mo", blurb: "Everything in Care, plus hands-on edits every month.", features: ["Everything in Care", "Up to 3 hours of content & design edits each month", "Next-business-day replies", "Monthly speed & uptime report"] },
-];
-
 export const steps = [
-  { step: "01", title: "Discovery call", body: "A short call or email thread to understand your business, goals and budget. You get a fixed quote — no surprises." },
-  { step: "02", title: "Design you approve", body: "We design your key pages first. Nothing gets built until you approve the design." },
-  { step: "03", title: "Build in milestones", body: "We build in clear stages with a live preview link, so you can see progress and give feedback at every step." },
-  { step: "04", title: "Launch & support", body: "We launch, connect your domain and analytics, and stay on hand for fixes and improvements." },
+  { step: "01", title: "Discuss", body: "A free call or WhatsApp chat to understand your business, goals and budget. No obligation." },
+  { step: "02", title: "Proposal & quote", body: "You get a clear written proposal with scope, timeline and a transparent quote that fits your budget." },
+  { step: "03", title: "Design", body: "We design your key screens first. Nothing gets built until you approve the look." },
+  { step: "04", title: "Build", body: "We build in milestones with a live preview link, so you see progress and give feedback at every step." },
+  { step: "05", title: "Launch & support", body: "We go live, connect your domain and analytics, hand over everything, and stay on for support." },
 ];
 
+// Real commitments only. No invented stats, clients or testimonials.
 export const reasons = [
-  { title: "You approve the design before we build", body: "See and sign off on the look of your site before any development starts." },
-  { title: "Transparent, published pricing", body: "Starting prices are on this site. Your quote is fixed in writing before work begins." },
-  { title: "50% upfront, milestone billing", body: "Pay half to start and the rest on delivery — or in milestones for larger builds." },
-  { title: "Secure online payments", body: "Invoices and card payments are handled through a secure online payment provider." },
-  { title: "Available on US business hours", body: "We're available Monday–Friday, 9am–6pm US Eastern, so you get quick replies and calls during your working day." },
-  { title: "We ship our own products", body: "We build and run our own SaaS, so we know what it takes to launch and maintain software." },
+  { title: "Premium quality, fair pricing", body: "The same standard as big agencies, with transparent, budget-friendly quotes and no hidden charges." },
+  { title: "You approve the design first", body: "See and sign off on the look before any development starts." },
+  { title: "Milestone-based payments", body: "Pay in stages as work is delivered, so you're never paying for something you haven't seen." },
+  { title: "You own everything", body: "Code, design, domain and hosting accounts are handed over to you. No lock-in." },
+  { title: "Mobile-first and fast", body: "Built for the phones your customers actually use, and quick even on patchy mobile data." },
+  { title: "Ongoing support", body: "We stay on after launch for fixes, updates and improvements whenever you need them." },
 ];
+
+export const payments = {
+  india: ["UPI", "Bank transfer (NEFT / IMPS / RTGS)"],
+  international: "Card or online payment through a secure Dodo Payments link, when needed.",
+};
 
 export type Industry = {
   slug: string;
@@ -192,49 +149,49 @@ export type Industry = {
   image: string;
 };
 
-// Add a new industry by appending an object here — the Industries page and home section update automatically.
+// Add a new industry by appending an object here. The Industries page and home section update automatically.
 export const industries: Industry[] = [
   {
     slug: "local-services",
-    name: "Local & home services",
-    summary: "More booked jobs from local search. For roofers, plumbers, HVAC, cleaners and contractors whose phone is their sales team.",
-    needs: ["Click-to-call & quote forms", "Service-area pages for local SEO", "Fast loading on mobile data"],
-    image: "/images/roofing.jpg",
+    name: "Shops & local businesses",
+    summary: "Get found on Google Maps and get more calls and walk-ins. For shops, showrooms, salons, service providers and contractors.",
+    needs: ["Google Business Profile & Maps", "Click-to-call & WhatsApp buttons", "Fast loading on mobile data"],
+    image: "/images/ind-shop-counter.jpg",
   },
   {
     slug: "healthcare",
-    name: "Healthcare & clinics",
-    summary: "Fill your calendar with patients who already trust you. For dental practices, clinics and therapists.",
-    needs: ["Online booking integration", "Clear treatment & pricing pages", "Accessible, calm design"],
-    image: "/images/dental-smile.jpg",
+    name: "Clinics & healthcare",
+    summary: "Help patients trust you before they walk in. For clinics, dental practices, diagnostic centres and therapists.",
+    needs: ["Appointment requests & booking", "Doctor & treatment pages", "Calm, accessible design"],
+    image: "/images/ind-clinic-interior.jpg",
   },
   {
-    slug: "real-estate",
-    name: "Real estate",
-    summary: "Turn listing views into buyer enquiries. For agents, brokers and developers who need properties to look their best.",
-    needs: ["Listing galleries & filters", "Lead capture on every listing", "Neighbourhood landing pages"],
-    image: "/images/real-estate.jpg",
-  },
-  {
-    slug: "restaurants",
-    name: "Restaurants & hospitality",
-    summary: "More tables booked and orders placed, straight from a phone. For restaurants, cafés and venues.",
-    needs: ["Menus that work on phones", "Reservations & ordering links", "Google Maps & hours"],
-    image: "/images/restaurant.jpg",
+    slug: "education",
+    name: "Coaching & education",
+    summary: "Fill more batches with a site parents and students trust. For coaching institutes, tutors, schools and course creators.",
+    needs: ["Course & batch pages", "Enquiry & demo-class forms", "Results and faculty sections"],
+    image: "/images/ind-classroom.jpg",
   },
   {
     slug: "ecommerce",
-    name: "E-commerce & retail",
-    summary: "More completed checkouts and repeat buyers. For independent brands and shops selling online.",
-    needs: ["Fast product pages", "Checkout & payment setup", "Inventory-friendly admin"],
-    image: "/images/ecommerce.jpg",
+    name: "D2C brands & e-commerce",
+    summary: "More completed checkouts and repeat buyers. For D2C brands and retailers selling across India and beyond.",
+    needs: ["Razorpay / UPI checkout", "Fast product pages", "Inventory-friendly admin"],
+    image: "/images/ind-clothing-store.jpg",
+  },
+  {
+    slug: "manufacturing",
+    name: "Manufacturers & B2B",
+    summary: "Win bigger buyers with a site that looks as solid as your factory. For manufacturers, exporters, traders and suppliers.",
+    needs: ["Product catalogues & spec sheets", "RFQ / bulk-enquiry forms", "Internal tools & Android apps"],
+    image: "/images/real-estate.jpg",
   },
   {
     slug: "startups",
     name: "Startups & SaaS",
     summary: "Get to paying users faster. For founders who need a landing page that converts or an MVP built properly the first time.",
-    needs: ["Conversion-focused landing pages", "MVPs with auth & billing", "Dashboards & admin panels"],
-    image: "/images/team.jpg",
+    needs: ["Conversion-focused landing pages", "MVPs with logins & payments", "Dashboards & admin panels"],
+    image: "/images/ind-startup-team.jpg",
   },
 ];
 
@@ -244,7 +201,6 @@ export type Product = {
   tagline: string;
   description: string;
   points: string[];
-  pricing?: string;
   accent: "brand" | "gold";
 };
 
@@ -257,7 +213,6 @@ export const products: Product[] = [
     description:
       "Know the moment a website goes down, an SSL certificate is about to expire, or a domain needs renewing — before your customers notice.",
     points: ["Uptime monitoring with alerts", "SSL certificate expiry tracking", "Domain expiry reminders"],
-    pricing: "Pro $12/mo · Business $42/mo",
     accent: "brand",
   },
   {
@@ -267,7 +222,6 @@ export const products: Product[] = [
     description:
       "A playful typing-speed game. Pick a timed or word-count test, add punctuation or numbers, choose a difficulty — and feed your seahorse as you improve.",
     points: ["Timed tests: 15, 30, 60 or 120s", "Word, punctuation & number modes", "Easy, medium and hard difficulty"],
-    pricing: "Free to play",
     accent: "gold",
   },
 ];
@@ -286,74 +240,91 @@ export type Concept = {
 
 export const concepts: Concept[] = [
   {
-    slug: "roofing",
-    client: "Summit Ridge Roofing",
-    industry: "Local services",
-    title: "A storm-season website built to get the phone ringing",
-    summary:
-      "A fictional roofing contractor in Oklahoma. Homeowners land here on a phone right after a hail storm, so the design puts a free inspection request and click-to-call above everything else.",
-    image: "/images/roofing.jpg",
-    hero: "Storm damage? Free roof inspection in 24 hours.",
-    cta: "Book free inspection",
-    highlights: ["Sticky click-to-call on mobile", "Insurance-claim help page", "Service-area pages for local SEO"],
-  },
-  {
     slug: "dental",
-    client: "Brightside Dental",
+    client: "Sahyadri Smiles Dental",
     industry: "Healthcare",
-    title: "A calm, trustworthy clinic site with booking front and centre",
+    title: "A calm, trustworthy clinic site with appointments front and centre",
     summary:
-      "A fictional family dental practice. Nervous patients want reassurance, clear prices and an easy way to book, so the site leads with friendly faces, transparent treatment pages and online booking.",
-    image: "/images/dental-smile.jpg",
-    hero: "Gentle family dentistry, booked in two taps.",
-    cta: "Book a visit",
-    highlights: ["Online booking flow", "Treatment & pricing pages", "Accessible, high-contrast design"],
+      "A fictional family dental clinic. Nervous patients want reassurance, clear treatment information and an easy way to book, so the site leads with friendly faces, treatment pages and a one-tap appointment request.",
+    image: "/images/case-dentist-xray.jpg",
+    hero: "Gentle family dentistry. Book your visit in two taps.",
+    cta: "Book appointment",
+    highlights: ["Appointment request flow", "Treatment pages", "WhatsApp & call buttons"],
   },
   {
     slug: "restaurant",
-    client: "Ember & Oak",
+    client: "Kesar Kitchen",
     industry: "Restaurants",
     title: "A warm restaurant site where the menu loads in a blink",
     summary:
-      "A fictional neighbourhood restaurant. Diners decide in seconds, so the menu, hours and reservation button are all one tap away on mobile.",
+      "A fictional neighbourhood restaurant. Diners decide in seconds, so the menu, timings, Google Maps and the table-booking button are all one tap away on mobile.",
     image: "/images/restaurant.jpg",
-    hero: "Wood-fired plates, warm rooms, open till late.",
+    hero: "Slow-cooked classics, warm rooms, open till late.",
     cta: "Reserve a table",
-    highlights: ["Phone-friendly menu", "Reservation integration", "Hours & map at a glance"],
+    highlights: ["Phone-friendly menu", "Table booking & ordering links", "Timings & map at a glance"],
+  },
+  {
+    slug: "store",
+    client: "Indigo Loom",
+    industry: "D2C e-commerce",
+    title: "A D2C store with a checkout that just works",
+    summary:
+      "A fictional handloom clothing brand. Shoppers want to see the fabric up close and pay the way they like, so product pages are image-first and checkout supports UPI, cards and COD.",
+    image: "/images/ecommerce.jpg",
+    hero: "Handwoven, made to last. Free shipping across India.",
+    cta: "Shop the collection",
+    highlights: ["Razorpay / UPI checkout", "Image-first product pages", "Order & stock admin"],
   },
 ];
 
 export const faqs = [
-  { q: "How much does a website cost?", a: "Business websites start at $1,500, larger lead-generation sites at $2,900, web app and SaaS MVPs at $7,500 and mobile app MVPs at $6,500. After a short call you get a fixed written quote, so the price doesn't change unless the scope does." },
-  { q: "How do payments work?", a: "Typically 50% upfront to start and 50% on delivery. Larger projects are split into milestones. You pay by card or bank transfer through secure online invoices." },
-  { q: "What if I don't like the design?", a: "You approve the design before we build. We design your key pages first and revise them with you — development only begins once you're happy." },
-  { q: "When can I reach you?", a: "We're available Monday–Friday, 9am–6pm US Eastern (ET), which is 6am–3pm Pacific and 2pm–11pm in London. Calls are scheduled in those hours, and most updates happen over email with a live preview link you can check anytime." },
-  { q: "How long does a project take?", a: "Most business websites take 2–3 weeks from approved design to launch. Web and mobile apps usually take 4–10 weeks depending on scope." },
-  { q: "Do I own the website?", a: "Yes. Once the final invoice is paid, the code, design and content are yours, and we can hand over everything or keep maintaining it for you." },
-  { q: "Can you work on my existing site?", a: "Yes. A speed sprint ($750) fixes slow loading and Core Web Vitals on your current site. If the site needs more, a full redesign starts at $1,500." },
+  { q: "How much will my project cost?", a: "Every project is different, so we quote after a free call. You get a transparent, written quote based on your scope, usually well below typical agency rates for the same quality. Share your budget range in the form and we'll suggest what fits." },
+  { q: "Why don't you list prices on the website?", a: "A five-page site for a clinic and a store with 500 products are very different jobs. Instead of a one-size price, we listen first and send a fixed, itemised quote, so you only pay for what you actually need." },
+  { q: "How do payments work?", a: "Payments are milestone-based: a part to start, and the rest in stages as work is delivered and approved. Indian clients pay by UPI or bank transfer. When needed, you can also pay by card or online through a secure Dodo Payments link." },
+  { q: "What if I don't like the design?", a: "You approve the design before we build. We design your key pages first and revise them with you. Development starts only once you're happy." },
+  { q: "When can I reach you?", a: "We're available Monday to Saturday, 10am–7pm IST. We work with clients worldwide, so if you're in another time zone, just tell us and we'll find a call time that works." },
+  { q: "How long does a project take?", a: "Landing pages usually take about a week and business websites 2–3 weeks from approved design. E-commerce stores, web apps and Android apps usually take 3–10 weeks depending on scope." },
+  { q: "Do I own the website and the code?", a: "Yes. Once the project is paid for, the code, design, content and domain are yours. We hand over all accounts and access, or keep maintaining it for you if you prefer." },
+  { q: "Do you provide support after launch?", a: "Yes. Every project includes a period of post-launch support, and we offer ongoing maintenance for updates, backups, monitoring and edits." },
 ];
 
 // Company (About page) content
 export const values = [
-  { title: "Craft over volume", body: "We take on a focused number of projects so every page, interaction and line of code gets real attention." },
-  { title: "Clarity, always", body: "Fixed written quotes, published starting prices and a live preview link. You always know what's happening and what it costs." },
-  { title: "Performance is a feature", body: "Speed, accessibility and search are built in from day one, not bolted on before launch." },
-  { title: "Own what we ship", body: "We run our own SaaS products, so we design for the long life of software, not just launch day." },
+  { title: "Quality you'd expect from a big agency", body: "Careful design, clean code and real attention to detail on every project, big or small." },
+  { title: "Honest, transparent quotes", body: "A written quote before work starts and no hidden charges. If the scope changes, we tell you first." },
+  { title: "Performance is a feature", body: "Speed, mobile experience and search are built in from day one, not bolted on before launch." },
+  { title: "Your business, your ownership", body: "Code, domain and accounts are handed over to you. We earn repeat work by doing good work, not by lock-in." },
 ];
 
 export const capabilities = [
   { group: "Design", items: ["Brand-aligned UI design", "UX flows & wireframes", "Design systems", "Copy & content structure"] },
   { group: "Engineering", items: ["Next.js & React", "TypeScript & Node.js", "Postgres, Prisma & Neon", "AWS & Vercel hosting"] },
   { group: "Product", items: ["SaaS MVPs", "Auth, roles & billing", "Admin dashboards", "Android & cross-platform apps"] },
-  { group: "Growth", items: ["Technical SEO", "Core Web Vitals", "Analytics & conversion tracking", "Ongoing care plans"] },
+  { group: "Growth", items: ["Technical SEO", "Core Web Vitals", "Analytics & conversion tracking", "Ongoing support & maintenance"] },
 ];
 
-// Our availability, shown in US Eastern and converted to other zones (local times; US and UK daylight saving mostly line up).
-export const hours = { label: "Monday–Friday, 9am–6pm US Eastern (ET)", short: "Mon–Fri, 9am–6pm ET" };
-export const timezones = [
-  { zone: "Eastern", abbr: "ET", example: "New York", local: "9am–6pm", start: 9, end: 18 },
-  { zone: "Central", abbr: "CT", example: "Chicago", local: "8am–5pm", start: 8, end: 17 },
-  { zone: "Mountain", abbr: "MT", example: "Denver", local: "7am–4pm", start: 7, end: 16 },
-  { zone: "Pacific", abbr: "PT", example: "Los Angeles", local: "6am–3pm", start: 6, end: 15 },
-  { zone: "London", abbr: "UK", example: "London", local: "2pm–11pm", start: 14, end: 23 },
+// Our working hours, in India Standard Time.
+export const hours = { label: "Monday–Saturday, 10am–7pm IST", short: "Mon–Sat · 10am–7pm IST", global: "We work with clients worldwide and can schedule calls across time zones." };
+
+// Hero offer: honest risk-reversal commitments (no stats, no clients claimed).
+export const promises = [
+  { title: "Free homepage concept", body: "See your new homepage designed before you pay anything." },
+  { title: "Approve the design first", body: "Nothing gets built until you're happy with the look." },
+  { title: "Pay in milestones", body: "UPI or bank transfer, or a secure Dodo Payments link, only as work is delivered." },
+  { title: "You own everything", body: "Code, design, domain and accounts are handed to you." },
 ];
+
+// Comparison table (qualitative, no invented numbers).
+export const comparison = {
+  cols: ["Makvion", "Typical big agency", "Freelancer / template"],
+  rows: [
+    { label: "Custom design, no templates", v: ["yes", "yes", "partly"] },
+    { label: "Price", v: ["Well below agency rates", "Premium", "Low"] },
+    { label: "Free homepage concept before you pay", v: ["yes", "no", "no"] },
+    { label: "Approve design before development", v: ["yes", "yes", "partly"] },
+    { label: "Milestone payments", v: ["yes", "partly", "no"] },
+    { label: "You own the code and domain", v: ["yes", "partly", "partly"] },
+    { label: "Fast, mobile-first build with SEO basics", v: ["yes", "yes", "partly"] },
+    { label: "Support after launch", v: ["yes", "yes", "no"] },
+  ],
+};

@@ -1,23 +1,24 @@
 import type { Metadata } from "next";
-import { Container } from "@/components/ui";
-import { CtaBand, PageHero, ProductsShowcase } from "@/components/sections";
+import { pageMeta, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { FinalCta } from "@/components/home/Sections";
+import { PageHeroV6, ProductPanels } from "@/components/v6";
 
-export const metadata: Metadata = {
-  title: "Our Products",
-  description: "Makvion builds and runs its own products: Websites With Punch (uptime, SSL & domain monitoring) and Lost Seahorse (a typing-speed game).",
-  alternates: { canonical: "/products" },
-};
+export const metadata: Metadata = pageMeta({
+  path: "/products",
+  title: "Our Products: Uptime Monitoring & Typing Game | Makvion",
+  description: "Makvion builds and runs its own products: Websites With Punch for uptime, SSL and domain monitoring, and Lost Seahorse, a fun typing-speed game. Take a look.",
+  keywords: ["website uptime monitoring", "SSL expiry monitoring", "domain expiry monitoring", "typing speed game"],
+});
 
 export default function ProductsPage() {
   return (
     <>
-      <PageHero eyebrow="Products" title={<>Proof we can build software <span className="text-brand-600">people rely on.</span></>}
-        intro="We design, launch and operate our own products. Everything we learn running them goes into the software we build for you." />
-      <section className="relative overflow-hidden bg-sand py-24 sm:py-32">
-        <div className="bg-diagonal pointer-events-none absolute inset-0" />
-        <Container className="relative"><h2 className="sr-only">Our products</h2><ProductsShowcase detailed /></Container>
-      </section>
-      <CtaBand title="Have a product idea? Get it in front of users, built properly." body="We bring the same care to your SaaS or app that we bring to our own, from scoping to launch." />
+      <JsonLd data={breadcrumbJsonLd([{ name: "Products", path: "/products" }])} />
+      <PageHeroV6 eyebrow="Products" title={<>We build and run <span className="text-brand-600">our own software, too.</span></>}
+        intro="Everything we learn operating our own products goes into the software we build for you." />
+      <ProductPanels />
+      <FinalCta tone="dark" title="Have a product idea? Let's build it properly." body="From scoping to launch, with the same care we give our own products." />
     </>
   );
 }
