@@ -19,7 +19,7 @@ export default function IndustriesPage() {
       <JsonLd data={breadcrumbJsonLd([{ name: "Industries", path: "/industries" }])} />
       <section className="relative overflow-hidden bg-cream text-ink">
         <div aria-hidden className="bg-grid pointer-events-none absolute inset-0 opacity-60" />
-        <Container className="relative pb-20 pt-16 sm:pb-28 sm:pt-24">
+        <Container className="relative pb-20 pt-32 sm:pb-28 sm:pt-24">
           <Kicker>Industries</Kicker>
           <h1 className="font-display mt-8 max-w-5xl text-[2.7rem] font-extrabold leading-[0.98] tracking-[-0.045em] sm:text-[4.8rem] lg:text-[5.8rem]">
             More customers, <span className="text-brand-600">whatever you sell.</span>

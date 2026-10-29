@@ -11,7 +11,7 @@ export function PageHeroV6({ eyebrow, title, intro, image, imageAlt = "", childr
   return (
     <section className={`relative overflow-hidden ${dark ? "bg-brand-950 text-white" : "bg-cream text-ink"}`}>
       <div aria-hidden className={`${dark ? "bg-grid-dark" : "bg-grid"} pointer-events-none absolute inset-0 opacity-60`} />
-      <Container className={`relative grid gap-12 pb-20 pt-16 sm:pb-28 sm:pt-24 ${image ? "lg:grid-cols-12 lg:items-end" : ""}`}>
+      <Container className={`relative grid gap-12 pb-20 pt-32 sm:pb-28 sm:pt-24 ${image ? "lg:grid-cols-12 lg:items-end" : ""}`}>
         <div className={image ? "lg:col-span-7" : ""}>
           <Kicker dark={dark}>{eyebrow}</Kicker>
           <h1 className={`font-display mt-8 font-extrabold leading-[0.95] tracking-[-0.045em] ${image ? "text-[2.7rem] sm:text-[4.6rem] lg:text-[5.2rem]" : "max-w-5xl text-[2.9rem] sm:text-[5.2rem] lg:text-[6.4rem]"}`}>{title}</h1>

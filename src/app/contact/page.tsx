@@ -22,7 +22,7 @@ export default function ContactPage() {
       <JsonLd data={breadcrumbJsonLd([{ name: "Contact", path: "/contact" }])} />
       <section className="relative overflow-hidden bg-cream">
         <div aria-hidden className="bg-grid pointer-events-none absolute inset-0 opacity-60" />
-        <Container className="relative pb-16 pt-16 sm:pb-20 sm:pt-24">
+        <Container className="relative pb-16 pt-32 sm:pb-20 sm:pt-24">
           <Kicker>Contact</Kicker>
           <h1 className="font-display mt-8 max-w-5xl text-[2.9rem] font-extrabold leading-[0.95] tracking-[-0.045em] sm:text-[5.2rem] lg:text-[6.4rem]">Get a free quote. <span className="text-brand-600">No obligation.</span></h1>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">Tell us about your business. We reply within one business day to set up a free call, then send a clear written quote and a free homepage concept.</p>

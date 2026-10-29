@@ -16,7 +16,7 @@ export function HeroV5() {
   return (
     <section className="relative overflow-hidden bg-cream">
       <div aria-hidden className="bg-grid mask-fade-b pointer-events-none absolute inset-0 opacity-70" />
-      <Container className="relative pb-16 pt-20 sm:pt-32">
+      <Container className="relative pb-16 pt-32 sm:pt-32">
         <h1 className="font-display text-[2.3rem] font-extrabold leading-[0.98] tracking-[-0.045em] text-ink sm:text-[5.2rem] lg:text-[6.2rem] lg:max-w-[1150px]">
           Premium‑agency websites.<br /><span className="text-brand-600">Without the premium‑agency price.</span>
         </h1>

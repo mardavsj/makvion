@@ -46,7 +46,11 @@ export function BeforeAfter() {
           ref={box}
           className="relative select-none overflow-hidden rounded-[1.6rem] bg-white touch-pan-y sm:rounded-[1.1rem]"
           style={{ aspectRatio: `${cw}/${ch}`, cursor: dragging ? "grabbing" : "ew-resize" }}
-          onPointerDown={(e) => { setDragging(true); (e.target as HTMLElement).setPointerCapture?.(e.pointerId); move(e.clientX); }}
+          onPointerDown={(e) => {
+            /* touch/pen: only the handle zone starts a drag; taps elsewhere do nothing and the page still scrolls */
+            if (e.pointerType !== "mouse" && !(e.target as HTMLElement).closest?.("[data-ba-handle]")) return;
+            setDragging(true); (e.target as HTMLElement).setPointerCapture?.(e.pointerId); move(e.clientX);
+          }}
           onPointerMove={(e) => dragging && move(e.clientX)}
           onPointerUp={() => setDragging(false)}
           onPointerCancel={() => setDragging(false)}
@@ -58,6 +62,7 @@ export function BeforeAfter() {
 
 
           {/* handle */}
+          <div data-ba-handle aria-hidden className="absolute inset-y-0 z-[25] w-14 -translate-x-1/2" style={{ left: `${Math.min(96, Math.max(4, pos))}%`, touchAction: "none", transition: dragging ? "none" : "left .5s cubic-bezier(.2,.8,.2,1)" }} />
           <div aria-hidden className="pointer-events-none absolute inset-y-0 z-20" style={{ left: `${Math.min(96, Math.max(4, pos))}%`, transition: dragging ? "none" : "left .5s cubic-bezier(.2,.8,.2,1)" }}>
             <div className="absolute inset-y-0 -left-px w-[3px] bg-[#1b1f1e] shadow-[0_0_0_1px_rgba(255,255,255,.5),0_0_14px_rgba(0,0,0,.35)]" />
             <div className={`absolute left-0 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-0 rounded-full bg-[#1b1f1e] text-white shadow-[0_10px_28px_-6px_rgba(0,0,0,.6),0_0_0_3px_rgba(255,255,255,.35)] transition-transform duration-200 sm:h-12 sm:w-12 ${dragging ? "scale-110" : ""}`}>
